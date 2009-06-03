@@ -6,11 +6,17 @@ require_once(dirname(__FILE__).'/limonade.php');
 
 class WikirPage 
 {
-	var $name = null;
+	public $name = null;
+	public $content = null;
+	
+	public function __construct()
+	{
+	  
+	}
 	
 	public static function find($page)
 	{
-		$file = file_path(option('pages_dir'),$page);
+		$file = self::filepath($page);
 		if(!file_exists($file)) return false;
 		return file_read($file, $return = true);
 	}
@@ -20,33 +26,7 @@ class WikirPage
 		return file_list_dir(option('pages_dir'));
 	}
 	
-	public static function create($page)
-	{
-		$handle = file_put_contents(option('pages_dir').'/'.filename($page));
-		if ($handle!=false)
-		{
-			return true;
-		}
-	}
-	
-	public function update($page)
-	{
-		$handle = file_put_contents(option('pages_dir').'/'.filename($page));
-		if ($handle!=false)
-		{
-			return true;
-		}
-	}
-	
-	public function destroy($page)
-	{
-		if (@unlink(filename($page)))
-		{
-			return true;
-		}
-	}
-	
-	public function slug($name, $replacement = '_')
+	public static function slug($name, $replacement = '_')
 	{
 		$map = array(
 			'/à|á|å|â/' => 'a',
@@ -69,12 +49,40 @@ class WikirPage
 		return preg_replace(array_keys($map), array_values($map), $name);
 	}
 	
-	public function filename($name)
+	public static function filename($name)
 	{
-		if (isset($name))
+		return self::slug($name).'.mkd';
+	}
+	
+	public static function filepath($name)
+	{
+		return file_path(option('pages_dir'), self::filename($page));
+	}
+	
+	public function name($name = null)
+	{
+	  if(!is_null($name)) $this->name = $name;
+	  return $this->name;
+	}
+	
+	public function content($content = null)
+	{
+	  if(!is_null($content)) $this->content = $content;
+	  return $this->content;
+	}
+	
+	public function save()
+	{
+		return file_put_contents(option('pages_dir').'/'.filename($this->name));
+	}
+	
+	public function destroy()
+	{
+		if (@unlink(filename($this->name)))
 		{
-			return $name.'.mkd';
+			return true;
 		}
 	}
+	
 }
 ?>
