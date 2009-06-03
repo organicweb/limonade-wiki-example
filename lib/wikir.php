@@ -14,15 +14,19 @@ class WikirPage
 	  
 	}
 	
-	public static function find($page)
+	public static function find($page_name)
 	{
-		$file = self::filepath($page);
+		$file = self::filepath($page_name);
 		if(!file_exists($file)) return false;
-		return file_read($file, $return = true);
+		$page = new self();
+		$page->name($page_name);
+		$page->content(file_read($file, $return = true));
+		return $page;
 	}
 	
 	public static function find_all()
 	{
+		# TODO: return WikirPage instances
 		return file_list_dir(option('pages_dir'));
 	}
 	
@@ -56,7 +60,7 @@ class WikirPage
 	
 	public static function filepath($name)
 	{
-		return file_path(option('pages_dir'), self::filename($page));
+		return file_path(option('pages_dir'), self::filename($name));
 	}
 	
 	public function name($name = null)
@@ -83,4 +87,15 @@ class WikirPage
 	}
 	
 }
+
+
+## HELPERS
+
+function wikir_render($str)
+{
+  # TODO: implements markdown and linkification...
+  return $str;
+}
+
+
 ?>
