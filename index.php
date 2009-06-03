@@ -21,7 +21,7 @@ function before()
 dispatch('/', 'wikir_home');
   function wikir_home()
   {
-    redirect(url_for('/Home'));
+    return redirect(url_for('/Home'));
   }
 
 
@@ -32,8 +32,8 @@ dispatch('/:page', 'wikir_page_show');
     if(empty($page_name)) halt(NOT_FOUND);
     if($page = WikirPage::find($page_name))
     {
-      set('page_name', $page->name);
-      set('page_content', $page->content);
+      set('page_name', $page->name());
+      set('page_content', $page->content());
       return html('show.php');
     }
     halt(NOT_FOUND, 'No page '.$page_name);
@@ -85,9 +85,9 @@ dispatch_put('/:page', 'wikir_page_update');
     {
       $page->name($page_name);
       $page->content($page_content);
-      if($page->save())
+      if($page->save() !== FALSE)
       {
-        redirect(url_for('/'.$page->name()));
+        return redirect(url_for('/'.$page->name()));
       }
       halt('An error occured. Unable to update this page. Please check page/ dir is writable.');
     }
