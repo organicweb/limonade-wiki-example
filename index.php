@@ -27,6 +27,7 @@ dispatch('/:page', 'wikir_page_show');
     if(empty($page_name)) halt(NOT_FOUND);
     if($page = WikirPage::find($page_name))
     {
+      set('page_name', $page->name);
       set('page_content', $page->content);
       html('show.php');
     }
