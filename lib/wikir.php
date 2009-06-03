@@ -2,8 +2,7 @@
 
 
 
-
-require_once(dirname(_FILE_).'/limonade.php');
+require_once(dirname(__FILE__).'/limonade.php');
 
 class WikirPage 
 {
@@ -11,7 +10,9 @@ class WikirPage
 	
 	public static function find($page)
 	{
-		return file_read(filename($page), $return = true)
+		$file = file_path(option('pages_dir'),$page);
+		if(!file_exists($file)) return false;
+		return file_read($file, $return = true);
 	}
 	
 	public static function find_all()
@@ -63,7 +64,7 @@ class WikirPage
 			'/Ö/' => 'Oe',
 			'/ß/' => 'ss',
 			'/[^\w\s]/' => ' ',
-			'/\\s+/' => $replacement,
+			'/\\s+/' => $replacement
 		);
 		return preg_replace(array_keys($map), array_values($map), $name);
 	}
