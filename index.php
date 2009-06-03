@@ -1,11 +1,11 @@
 <?php
-require 'lib/limonade.php';
-#require 'lib/wikir.php';
-ini_set('display_errors', 1);
+
+require_once 'lib/limonade.php';
+
+
 
 function configure()
 {
-  
   $env = $_SERVER['HTTP_HOST'] == "localhost" ? ENV_DEVELOPMENT : ENV_PRODUCTION;
   option('env', $env);
   option('pages_dir', file_path(option('root_dir'), 'pages'));
@@ -34,7 +34,7 @@ dispatch('/:page', 'wikir_page_show');
     {
       set('page_name', $page->name);
       set('page_content', $page->content);
-      html('show.php');
+      return html('show.php');
     }
     halt(NOT_FOUND, 'No page '.$page_name);
   }
@@ -45,7 +45,7 @@ dispatch('/new/:page', 'wikir_page_new');
     $page_name = params('page');
     if(empty($page_name)) halt('A page name must be provided !');
     set('page_name', $page_name);
-    html('new.php');
+    return html('new.php');
   }
 
 dispatch_post('/new/:page', 'wikir_page_create');
@@ -71,11 +71,10 @@ dispatch('/:page/edit', 'wikir_page_edit');
     {
       set('page_name', $page->name());
       set('page_content', $page->content());
-      html('edit.php');
+      return html('edit.php');
     }
     halt(NOT_FOUND);
   }
-
 
 dispatch_put('/:page', 'wikir_page_update');
   function wikir_page_update()
