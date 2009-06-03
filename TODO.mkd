@@ -1,3 +1,6 @@
 # TODO #
 
+* test new
+* test delete/destroy
 * create wikir_render helper function
+* refactor controller functions
