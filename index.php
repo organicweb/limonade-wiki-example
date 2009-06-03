@@ -1,10 +1,15 @@
 <?php
 require 'lib/limonade.php';
-require 'lib/wikir.php';
+#require 'lib/wikir.php';
+ini_set('display_errors', 1);
 
 function configure()
 {
+  
+  $env = $_SERVER['HTTP_HOST'] == "localhost" ? ENV_DEVELOPMENT : ENV_PRODUCTION;
+  option('env', $env);
   option('pages_dir', file_path(option('root_dir'), 'pages'));
+  
 }
 
 function before()
@@ -16,7 +21,7 @@ function before()
 dispatch('/', 'wikir_home');
   function wikir_home()
   {
-    redirect('/Home');
+    redirect(url_for('/Home'));
   }
 
 
@@ -53,7 +58,7 @@ dispatch_post('/new/:page', 'wikir_page_create');
     $page->content($page_content); 
     if($page->save())
     {
-      redirect('/'.$page->name());
+      redirect(url_for('/'.$page->name()));
     }
     halt('An error occured. Unable to create this page. Please check page/ dir is writable.');
   }
@@ -83,7 +88,7 @@ dispatch_put('/:page', 'wikir_page_update');
       $page->content($page_content);
       if($page->save())
       {
-        redirect('/'.$page->name());
+        redirect(url_for('/'.$page->name()));
       }
       halt('An error occured. Unable to update this page. Please check page/ dir is writable.');
     }
@@ -100,11 +105,13 @@ dispatch_delete('/:page', 'wikir_page_destroy');
       $page->content($page_content);
       if($page->destroy())
       {
-        redirect('/');
+        redirect(url_for('/'));
       }
       halt('An error occured. Unable to destroy this page. Please check page/ dir is writable.');
     }
     halt(NOT_FOUND);
   }
+  
+run();
 
 ?>
