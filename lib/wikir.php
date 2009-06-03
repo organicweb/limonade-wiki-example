@@ -73,15 +73,13 @@ class WikirPage
 	
 	public function save()
 	{
-		return file_put_contents(option('pages_dir').'/'.filename($this->name));
+		return file_put_contents(option('pages_dir').'/'.filename($this->name),
+		        $this->content);
 	}
 	
 	public function destroy()
 	{
-		if (@unlink(filename($this->name)))
-		{
-			return true;
-		}
+		return unlink(filename($this->name));
 	}
 	
 }
