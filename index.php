@@ -6,10 +6,10 @@ require_once 'lib/limonade.php';
 
 function configure()
 {
-  $env = $_SERVER['HTTP_HOST'] == "localhost" ? ENV_DEVELOPMENT : ENV_PRODUCTION;
+  $localhost = preg_match('/^localhost(\:\d+)?/', $_SERVER['HTTP_HOST']);
+  $env =  $localhost ? ENV_DEVELOPMENT : ENV_PRODUCTION;
   option('env', $env);
   option('pages_dir', file_path(option('root_dir'), 'pages'));
-  
 }
 
 function before()
