@@ -481,7 +481,7 @@ function halt($errno = SERVER_ERROR, $msg = '', $debug_args = null)
   if(!empty($args)) $debug_args = $args;
   set('_lim_err_debug_args', $debug_args);
 
-  error_handler_dispatcher($errno, $msg, $errfile, $errline);
+  error_handler_dispatcher($errno, $msg, null, null);
 
 }
 
@@ -839,10 +839,10 @@ function request_uri($env = null)
   	}
   	elseif(array_key_exists('REQUEST_URI', $env['SERVER']) && !empty($env['SERVER']['REQUEST_URI']))
   	{
-  	  $request_uri = rtrim($env['SERVER']['REQUEST_URI'], '?/');
+  	  $request_uri = rtrim($env['SERVER']['REQUEST_URI'], '?/').'/';
   	  $base_path = $env['SERVER']['SCRIPT_NAME'];
-
-      if($request_uri."/index.php" == $base_path) $request_uri .= "/index.php";
+  	  
+      if($request_uri."index.php" == $base_path) $request_uri .= "index.php";
   	  $uri = str_replace($base_path, '', $request_uri);
   	}
   	elseif($env['SERVER']['argc'] > 1 && trim($env['SERVER']['argv'][1], '/') != '')
@@ -850,7 +850,7 @@ function request_uri($env = null)
       $uri = $env['SERVER']['argv'][1];
     }
 	}
-  
+
   $uri = rtrim($uri, "/"); # removes ending /
   if(empty($uri))
   {
@@ -1155,8 +1155,23 @@ function render($content_or_func, $layout = '', $locals = array())
 	$layout = count($args) > 0 ? array_shift($args) : layout();
 	$view_path = file_path(option('views_dir'),$content_or_func);
 	$vars = array_merge(set(), $locals);
-
+  $infinite_loop = false;
+  
+  # Avoid infinite loop: this function is in the backtrace ?
   if(function_exists($content_or_func))
+	{
+    $back_trace = debug_backtrace();
+    while($trace = array_shift($back_trace))
+    {
+      if($trace['function'] == strtolower($content_or_func))
+      {
+        $infinite_loop = true;
+        break;
+      }
+    }
+  }
+
+  if(function_exists($content_or_func) && !$infinite_loop)
 	{
 		ob_start();
 		call_user_func($content_or_func, $vars);
@@ -1189,7 +1204,7 @@ function render($content_or_func, $layout = '', $locals = array())
  */ 
 function html($content_or_func, $layout = '', $locals = array())
 {
-   header('Content-Type: text/html; charset='.strtolower(option('encoding')));
+   if(!headers_sent()) header('Content-Type: text/html; charset='.strtolower(option('encoding')));
    $args = func_get_args();
    return call_user_func_array('render', $args);
 }
@@ -1217,7 +1232,7 @@ function layout($function_or_file = null)
  */
 function xml($data)
 {
-  header('Content-Type: text/xml; charset='.strtolower(option('encoding')));
+  if(!headers_sent()) header('Content-Type: text/xml; charset='.strtolower(option('encoding')));
   $args = func_get_args();
   return call_user_func_array('render', $args);
 }
@@ -1232,7 +1247,7 @@ function xml($data)
  */
 function css($content_or_func, $layout = '', $locals = array())
 {
-   header('Content-Type: text/css; charset='.strtolower(option('encoding')));
+   if(!headers_sent()) header('Content-Type: text/css; charset='.strtolower(option('encoding')));
    $args = func_get_args();
    return call_user_func_array('render', $args);
 }
@@ -1247,7 +1262,7 @@ function css($content_or_func, $layout = '', $locals = array())
  */
 function txt($content_or_func, $layout = '', $locals = array())
 {
-   header('Content-Type: text/plain; charset='.strtolower(option('encoding')));
+   if(!headers_sent()) header('Content-Type: text/plain; charset='.strtolower(option('encoding')));
    $args = func_get_args();
    return call_user_func_array('render', $args);
 }
@@ -1261,7 +1276,7 @@ function txt($content_or_func, $layout = '', $locals = array())
  */
 function json($data, $json_option = 0)
 {
-   header('Content-Type: application/x-javascript; charset='.strtolower(option('encoding')));
+   if(!headers_sent()) header('Content-Type: application/x-javascript; charset='.strtolower(option('encoding')));
    return version_compare(PHP_VERSION, '5.3.0', '>=') ? json_encode($data, $json_option) : json_encode($data);
 }
 
@@ -1290,7 +1305,7 @@ function render_file($filename, $return = false)
     $content_type = mime_type(file_extension($filename));
     $header = 'Content-type: '.$content_type;
     if(file_is_text($filename)) $header .= 'charset='.strtolower(option('encoding'));
-    header($header);
+    if(!headers_sent()) header($header);
     return file_read($filename, $return);
   }
   else halt(NOT_FOUND, "unknown filename $filename");
@@ -1547,8 +1562,11 @@ define( 'HTTP_NOT_EXTENDED',                  510 );
  */
 function status($code = 500)
 {
-	$str = http_response_status_code($code);
-	header($str);
+	if(!headers_sent())
+	{
+	  $str = http_response_status_code($code);
+  	header($str);
+	}
 }
 
 /**
@@ -1566,8 +1584,11 @@ function redirect($uri)
   # one yourself.
   
   # TODO make absolute uri
-  header('Location: '.$uri);
-  exit;
+  if(!headers_sent())
+	{
+    header('Location: '.$uri);
+    exit;
+  }
 }
 
 /**
