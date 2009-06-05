@@ -839,10 +839,10 @@ function request_uri($env = null)
   	}
   	elseif(array_key_exists('REQUEST_URI', $env['SERVER']) && !empty($env['SERVER']['REQUEST_URI']))
   	{
-  	  $request_uri = rtrim($env['SERVER']['REQUEST_URI'], '?');
+  	  $request_uri = rtrim($env['SERVER']['REQUEST_URI'], '?/');
   	  $base_path = $env['SERVER']['SCRIPT_NAME'];
 
-      if($request_uri."index.php" == $base_path) $request_uri .= "index.php";
+      if($request_uri."/index.php" == $base_path) $request_uri .= "/index.php";
   	  $uri = str_replace($base_path, '', $request_uri);
   	}
   	elseif($env['SERVER']['argc'] > 1 && trim($env['SERVER']['argv'][1], '/') != '')
