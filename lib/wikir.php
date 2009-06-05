@@ -102,6 +102,18 @@ class WikirPage
 	{
 		return file_path(option('pages_dir'), self::filename($name));
 	}
+	
+	/**
+	 * Checks if a page exists or not
+	 *
+	 * @param string $name Name of the page
+	 * @return bool
+	 */
+	public static function exists($name)
+	{
+	   return file_exists(self::filepath($name));
+	}
+	
 /**
  * Return a string 
  *
@@ -148,9 +160,23 @@ class WikirPage
 
 function wikir_render($str)
 {
-  # TODO: implements markdown and linkification...
   $str = Markdown($str);
-  return $str;
+  $link_regexp = '/\[\[(.*?)\]\]/';
+  $regexps = array();
+  $replacements = array();
+  preg_match_all($link_regexp, $str, $matches, PREG_SET_ORDER);
+  foreach($matches as $match)
+  {
+    $regexps[] = '/\[\['.preg_quote($match[1]).'\]\]/';
+    $link  = '<a href="';
+    $link .= url_for($match[1]);
+    $link .= '">';
+    $link .= h($match[1]);
+    $link .= '</a>';
+    if(!WikirPage::exists($match[1])) $link .= '<sup>(?)</sup>';
+    $replacements[] = $link;
+  }
+  return preg_replace($regexps, $replacements, $str);
 }
 
 
