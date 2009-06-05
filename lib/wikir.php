@@ -161,13 +161,16 @@ class WikirPage
 function wikir_render($str)
 {
   $str = Markdown($str);
+  
   $link_regexp = '/\[\[(.*?)\]\]/';
   $regexps = array();
   $replacements = array();
   preg_match_all($link_regexp, $str, $matches, PREG_SET_ORDER);
   foreach($matches as $match)
   {
+    
     $regexps[] = '/\[\['.preg_quote($match[1]).'\]\]/';
+    
     $link  = '<a href="';
     $link .= url_for($match[1]);
     $link .= '">';
@@ -179,5 +182,74 @@ function wikir_render($str)
   return preg_replace($regexps, $replacements, $str);
 }
 
-
+function build_tagcloud()
+{
+  $files = file_list_dir(option('pages_dir'));
+  $keywords = array();
+  foreach ($files as $each)
+  {
+    $parsable[] = file_read(file_path(option('pages_dir'), $each), $return = true);
+    foreach ($parsable as &$parsed)
+    {
+      Markdown($parsed);
+    }
+    $link_regexp = '/\[\[(.*?)\]\]/';
+    $regexps = array();
+    $replacements = array();
+    preg_match_all($link_regexp, $parsed, $matches, PREG_SET_ORDER);
+    $matcher[] = $matches;
+  }
+  
+  foreach ($matcher as $value)
+  {
+    foreach($value as $match)
+    {
+      if(!array_key_exists($match[1], $keywords))
+      {
+        if (WikirPage::exists($match[1]))
+        {
+          $keywords[$match[1]] = 1;
+        }
+      } else
+      {
+        $keywords[$match[1]] += 1;
+      }
+    }
+  }
+  $maxscore = max($keywords);
+  $minscore = min($keywords);
+  foreach ($keywords as $tagName=>$score)
+  {
+    $size = getPercentSize($maxscore, $minscore, $score, 90, 200);
+    $link  = '<a href="';
+    $link .= url_for($tagName);
+    $link .= '" style="font-size:'.$size.'%">';
+    $link .= h($tagName);
+    $link .= '</a>';
+    $data[$tagName] = $link;
+    
+  }
+  $data = shuffleTags($data);
+  $data = implode($data, ' - ');
+  return $data;
+}
+function getPercentSize($maxscore, $minscore, $currentValue, $minsize = 90, $maxsize = 200)
+{
+  if ($minscore < 1) $minscore = 1;
+  $spread = $maxscore - $minscore;
+  if($spread == 0) $spread = 1;
+  $step = ($maxsize - $minsize) / $spread;
+  $size = $minsize + (($currentValue - $minscore) * $step);
+  return $size;
+}
+function shuffleTags ($tags) 
+{
+  while (count($tags) > 0) {
+      $val = array_rand($tags);
+      $new_arr[$val] = $tags[$val];
+      unset($tags[$val]);
+  }
+  if (isset($new_arr))
+  return $new_arr;
+}
 ?>

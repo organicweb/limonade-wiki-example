@@ -11,3 +11,7 @@
     <? endif; ?>
   </p>
 </div>
+<div id="tag_cloud">
+  <h6>Tag Cloud</h6>
+  <?=build_tagcloud(); ?>
+</div>
