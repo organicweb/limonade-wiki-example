@@ -229,6 +229,7 @@ function build_tagcloud()
     $data[$tagName] = $link;
     
   }
+  $data = shuffleTags($data);
   $data = implode($data, ' - ');
   return $data;
 }
@@ -240,5 +241,15 @@ function getPercentSize($maxscore, $minscore, $currentValue, $minsize = 90, $max
   $step = ($maxsize - $minsize) / $spread;
   $size = $minsize + (($currentValue - $minscore) * $step);
   return $size;
+}
+function shuffleTags ($tags) 
+{
+  while (count($tags) > 0) {
+      $val = array_rand($tags);
+      $new_arr[$val] = $tags[$val];
+      unset($tags[$val]);
+  }
+  if (isset($new_arr))
+  return $new_arr;
 }
 ?>
