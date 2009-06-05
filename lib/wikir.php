@@ -2,7 +2,8 @@
 
 
 
-require_once(dirname(__FILE__).'/limonade.php');
+require_once dirname(__FILE__).'/limonade.php';
+require_once dirname(__FILE__).'/vendors.php';
 
 class WikirPage 
 {
@@ -77,13 +78,12 @@ class WikirPage
 	
 	public function save()
 	{
-		return file_put_contents(option('pages_dir').'/'.filename($this->name),
-		        $this->content);
+		return file_put_contents(self::filepath($this->name), $this->content);
 	}
 	
 	public function destroy()
 	{
-		return unlink(filename($this->name));
+		return unlink(self::filepath($this->name));
 	}
 	
 }
@@ -94,6 +94,7 @@ class WikirPage
 function wikir_render($str)
 {
   # TODO: implements markdown and linkification...
+  $str = Markdown($str);
   return $str;
 }
 

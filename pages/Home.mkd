@@ -1,3 +1,6 @@
 ## Wikir: Home ##
 
 Welcome to Wikir !
+
+Go to [[My new page]]
+or [[Another page]]
