@@ -230,7 +230,7 @@ function build_tagcloud()
     
   }
   $data = shuffleTags($data);
-  $data = implode($data, ' - ');
+  $data = '<p>'.implode($data, ' - ').'</p>';
   return $data;
 }
 function getPercentSize($maxscore, $minscore, $currentValue, $minsize = 90, $maxsize = 200)
