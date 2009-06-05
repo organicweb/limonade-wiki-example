@@ -15,6 +15,10 @@ function configure()
 function before()
 {
   layout('default_layout.php');
+  if($page_name = params('page'))
+  {
+    params('page', rawurldecode($page_name));
+  }
 }
 
 
@@ -36,10 +40,11 @@ dispatch('/:page', 'wikir_page_show');
       set('page_content', $page->content());
       return html('show.php');
     }
-    halt(NOT_FOUND, 'No page '.$page_name);
+    # If page doesn't exist, redirect to new page form
+    redirect(url_for($page_name, 'new'));
   }
   
-dispatch('/new/:page', 'wikir_page_new');
+dispatch('/:page/new', 'wikir_page_new');
   function wikir_page_new()
   {
     $page_name = params('page');
@@ -48,7 +53,7 @@ dispatch('/new/:page', 'wikir_page_new');
     return html('new.php');
   }
 
-dispatch_post('/new/:page', 'wikir_page_create');
+dispatch_post('/:page', 'wikir_page_create');
   function wikir_page_create()
   {
     $page_name    = $_POST['page_name'];
@@ -98,6 +103,7 @@ dispatch_delete('/:page', 'wikir_page_destroy');
   function wikir_page_destroy()
   {
     $page_name = params('page');
+    if($page_name == 'Home') halt("Home page can't be deleted.");
     if($page = WikirPage::find($page_name))
     {
       $page->name($page_name);
