@@ -153,5 +153,14 @@ function wikir_render($str)
   return $str;
 }
 
-
+function build_tagcloud()
+{
+  $files = file_list_dir(option('pages_dir'));
+  $keywords = array();
+  foreach ($files as $each)
+  {
+    $parsable = file_read($file, $return = true);
+    if (!array_key_exists())
+  }
+}
 ?>
