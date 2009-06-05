@@ -21,7 +21,7 @@ function before()
 dispatch('/', 'wikir_home');
   function wikir_home()
   {
-    return redirect(url_for('/Home'));
+    redirect(url_for('/Home'));
   }
 
 
@@ -87,7 +87,7 @@ dispatch_put('/:page', 'wikir_page_update');
       $page->content($page_content);
       if($page->save() !== FALSE)
       {
-        return redirect(url_for('/'.$page->name()));
+        redirect(url_for('/'.$page->name()));
       }
       halt('An error occured. Unable to update this page. Please check page/ dir is writable.');
     }
