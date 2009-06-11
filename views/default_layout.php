@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Wikir</title>
+	<title>Wikir | Limonde PHP example</title>
 	<meta name="generator" content="TextMate http://macromates.com/">
 	<meta name="author" content="Fabrice Luraine">
 	<link rel="stylesheet" href="http://www.sofa-design.net/limonade/css/blueprint/screen.css" type="text/css" media="screen, projection">
@@ -13,13 +13,13 @@
     <link rel="stylesheet" href="http://www.sofa-design.net/limonade/css/blueprint/ie.css" type="text/css" media="screen, projection">
   <![endif]-->
   <link rel="stylesheet" href="http://www.sofa-design.net/limonade/css/screen.css" type="text/css" media="screen, projection">
-  <link rel="stylesheet" href="/public/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="./public/screen.css" type="text/css" media="screen, projection">
 	<!-- Date: 2009-06-03 -->
 </head>
 <body>
 <div id="header">
-  <h1>Limonade</h1>
-  <p>a PHP micro-framework</p>
+  <h1>Wikir</h1>
+  <p>Limonade PHP Example (with raspberry syrup)</p>
 </div>
   <div id="content">
     <?= $content; ?>
