@@ -1,6 +1,6 @@
 <h1><?=h($page_name);?></h1>
 <div id="page_content">
-  <?=wikir_render($page_content);?>
+  <?=html_wikir_render($page_content);?>
 </div>
 <div id="buttons">
   <p>
