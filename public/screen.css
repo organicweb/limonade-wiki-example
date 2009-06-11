@@ -82,13 +82,31 @@ html {
 			margin-top: 1.5em;
 			min-height: 400px;
 			}
-			#page_name_cloud {
-				margin: 0px 55px;
+			#buttons {
+				margin:  1em 0;
+				padding: 0.5em 0;
 				}
-				#page_name_cloud h5 {
+				#buttons p {
+					display: inline;
+					border-left: 10px solid #eb638a;
+					background-color: #55423a;
+					padding: 4px 10px;
+					color: #fff;
+					}
+					#buttons a, #buttons a:hover, #buttons a:visited {
+						color: #fff;
+						}
+			#pages_cloud {
+				background-color: #f1e6e1;
+				padding: 0.75em 0;
+				}
+				#pages_cloud h5 {
 					text-align:center;
-					border-bottom:7px solid #000000;
-				}
-				#page_name_cloud p {
+					padding:  0 55px;
+					border-bottom:0px solid #000000;
+					color: #bc8778;
+					}
+				#pages_cloud p {
 					text-align: center;
+					margin: 0px 55px;
 				}
