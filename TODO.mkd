@@ -4,12 +4,10 @@
 
 
 * cancel buttons (new / edit views)
+* documentation, espacially index.php (tutorial like commenting)
 
 
-* documentation
-    * dans le code
-    * README(dans le wiki directement)
-* ajout design basé sur Limonade
+
 * install demo sur sofa-design.net/limonade/demos/wikir
 
 ## LATER ##
@@ -20,7 +18,9 @@
 
 ## DONE ##
 
+* Docs: README(dans le wiki directement)
 * license et copyright
+* ajout design basé sur Limonade
 * unifier nommages
 * refactor controller functions
 * create linkification in wikir_render helper function
