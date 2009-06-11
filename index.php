@@ -84,7 +84,7 @@ dispatch('/:page/edit', 'wikir_page_edit');
 dispatch_put('/:page', 'wikir_page_update');
   function wikir_page_update()
   {
-    $page_name = params('page');
+    $page_name    = params('page');
     $page_content = $_POST['page_content'];
     if($page = WikirPage::find($page_name))
     {

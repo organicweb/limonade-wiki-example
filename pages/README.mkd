@@ -33,7 +33,7 @@ _Attention, ce projet ne sert que d'illustration à l'utilisation d'un développ
 
 ## Comment ça marche ##
 
-Une l'archive du projet décompactée, déposer le contenu de l'archive dans le dossier racine de votre serveur web (par exemple htdocs ou www).  
+Une fois l'archive du projet décompactée, déposer le contenu de l'archive dans le dossier racine de votre serveur web (par exemple htdocs ou www).  
 
 Avant toutes création de page, vous devez vous assurer que le serveur à les droits en écritures sur le dossier pages (chmod 0755).  
 
