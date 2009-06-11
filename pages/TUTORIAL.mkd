@@ -23,13 +23,14 @@ Nous testons si l'url est local ou un serveur sur le web, ce qui nous permet ens
 	$env =  $localhost ? ENV_DEVELOPMENT : ENV_PRODUCTION;
 	option('env', $env);
 	
-A l'aide de la fonction `option()`, on set la variable static `$options['env']` avec le résultat de la conditionnelle $env.
-
+A l'aide de la fonction `option()`, on défini l'option d'environnement (`env`) avec la variable $env.
 	
 	option('pages_dir', file_path(option('root_dir'), 'pages'));
 	
-Encore une fois à l'aide de la fonction `option()`, on set la variable static `$options['pages_dir]`.  
+On crée également une option propre à notre application: `pages_dir`. Cette option va définir le dossier dans lequel seront stockées les pages du wiki.
 La fonction `file_path()`, retourne le chemin absolue sur le serveur du nom de dossier passer en deuxième paramètre.
+
+A noter: les options standards de Limonade sont détaillée dans le [README](http://sofa-design.net/limonade/README.htm)
 
 ### Dispatch ###
 
