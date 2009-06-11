@@ -165,7 +165,7 @@ class WikirPage
  * @param string $str markdown content with [[wiki links]]
  * @return str
  */
-function wikir_render($str)
+function html_wikir_render($str)
 {
   $str = Markdown($str);
   
