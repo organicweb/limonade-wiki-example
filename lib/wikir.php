@@ -221,6 +221,7 @@ function html_pages_cloud($separator = ' - ')
     $refs = wikir_pages_references($content);
     foreach($refs as $ref)
     {
+      if(!array_key_exists($ref, $page_names)) $pages_names[$ref] = 0;
       $pages_names[$ref] += 1;
     }
   }
