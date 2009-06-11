@@ -33,7 +33,6 @@ dispatch('/:page', 'wikir_page_show');
   function wikir_page_show()
   {
     $page_name = params('page');
-    if(empty($page_name)) halt(NOT_FOUND);
     if($page = WikirPage::find($page_name))
     {
       set('page_name', $page->name());
