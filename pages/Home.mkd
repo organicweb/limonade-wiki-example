@@ -4,6 +4,8 @@ Welcome to Wikir !
 
 Please check the [[README]] first
 
+Then check the [[Tutorial]]
+
 Go to [[My new page]]
 or [[Another page]]
 
