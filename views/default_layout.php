@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Wikir | Limonde PHP example</title>
+	<title>Wikir | Limonade PHP example</title>
 	<meta name="generator" content="TextMate http://macromates.com/">
 	<meta name="author" content="Fabrice Luraine">
 	<link rel="stylesheet" href="./public/blueprint/screen.css" type="text/css" media="screen, projection">
@@ -30,7 +30,7 @@
     <p><?=html_pages_cloud(); ?></p>
   </div>
   <div id="footer">
-		&nbsp;
+		<p>© 2009 Fabrice Luraine, Mathias Standaert | Aerated with <a href="http://sofa-design.net/limonade/" title="Limonade PHP micro-framework">Limonade</a></p>
 	</div>
 </body>
 </html>

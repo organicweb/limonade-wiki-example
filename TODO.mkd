@@ -3,8 +3,8 @@
 ## NEXT ##
 
 
-* refactor controller functions
-* unifier nommages
+
+
 * license et copyright
 * documentation
     * dans le code
@@ -20,5 +20,6 @@
 
 ## DONE ##
 
-
+* unifier nommages
+* refactor controller functions
 * create linkification in wikir_render helper function

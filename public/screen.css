@@ -69,9 +69,10 @@ html {
 			height: 2em;
 			line-height: 2em;
 			text-align: right;
+			font-size: 0.8em;
 			}
 			#footer a {
-				color: #a3d8de;
+				color: #f1e6e1;
 				text-decoration: none;
 				}
 			#footer a:hover {
@@ -88,7 +89,7 @@ html {
 				}
 				#buttons p {
 					display: inline;
-					border-left: 10px solid #eb638a;
+					border-left: 10px solid #f1e6e1;
 					background-color: #55423a;
 					padding: 4px 10px;
 					color: #fff;
