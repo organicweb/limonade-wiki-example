@@ -1,0 +1,10 @@
+#page_name_cloud {
+	margin: 0px 55px;
+	}
+	#page_name_cloud h5 {
+		text-align:center;
+		border-bottom:7px solid #000000;
+	}
+	#page_name_cloud p {
+		text-align: center;
+	}
