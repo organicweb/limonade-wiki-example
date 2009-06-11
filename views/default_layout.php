@@ -25,8 +25,8 @@
   <div id="content">
     <?= $content; ?>
   </div>
-  <div id="page_name_cloud">
-    <h5>Tag Cloud</h5>
+  <div id="pages_cloud">
+    <h5>Pages Cloud</h5>
     <p><?=html_pages_cloud(); ?></p>
   </div>
   <div id="footer">
