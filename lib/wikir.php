@@ -158,6 +158,13 @@ class WikirPage
 
 ## HELPERS
 
+/**
+ * Returns html string for a given markdown string.
+ * Also converts double brackets wiki links in html links.
+ *
+ * @param string $str markdown content with [[wiki links]]
+ * @return str
+ */
 function wikir_render($str)
 {
   $str = Markdown($str);
@@ -196,10 +203,17 @@ function wikir_pages_references($str)
   return $refs;
 }
 
+/**
+ * Returns html pages cloud
+ *
+ * @param string $separator string separator between links
+ * @return str
+ */
 function html_pages_cloud($separator = ' - ')
 {
   $files = file_list_dir(option('pages_dir'));
   $pages_names = array();
+  
   foreach ($files as $file)
   {
     $content = file_read(file_path(option('pages_dir'), $file), $return = true);
@@ -221,14 +235,24 @@ function html_pages_cloud($separator = ' - ')
                       'html_pages_cloud_link',
                       null, 
                       array('page_name' => $page_name, 'size' => $size)
-                    );
-    
+                    ); 
   }
   
   shuffle($html_links);
   return implode($html_links, $separator);
 }
 
+/**
+ * Returns a percent size
+ *
+ * @access private
+ * @param string $maxscore 
+ * @param string $minscore 
+ * @param string $current_value 
+ * @param string $minsize 
+ * @param string $maxsize 
+ * @return int
+ */
 function _get_percent_size($maxscore, $minscore, $current_value, $minsize = 90, $maxsize = 200)
 {
   if ($minscore < 1) $minscore = 1;
