@@ -85,7 +85,7 @@ Rentrons un peu plus dans le détail de la fonction `wikir_page_show()` :
 	
 	$page_name = params('page');
 
-Ici on récupère le paramètre page qui est passé par l'url
+Ici on récupère le paramètre page qui est passé par l'url 
 
 	
 	if($page = WikirPage::find($page_name))
@@ -96,7 +96,9 @@ Ici on récupère le paramètre page qui est passé par l'url
 	}
 
 A l'aide de la conditionnelle if on test si la page existe.  
-Si la page existe la fonction static `WikirPage::find()` renvoie une instance de la class `WikirPage`, on peut donc ensuite utliser les methodes de la class.  
+Si la page existe la fonction static `WikirPage::find()` renvoie une instance de la class `WikirPage`, on peut donc ensuite utiliser les méthodes de la class.  
+On peut donc passer des variables à la vue, à l'aide de la fonction `set()`.  
+La fonction `html()` passe les paramètres, appelle la vue et affiche le résultat html de la page.  
 Si elle n'existe on ne rentre pas dans la conditionnelle et le code suivant est exécuté. :  
 
 	
