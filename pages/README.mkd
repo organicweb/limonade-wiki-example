@@ -21,49 +21,34 @@ Basée sur [**Limonade PHP 0.3**](http://github.com/sofadesign/limonade) aka _Ci
 
 ## Périmètre du projet ##
 
-Il s'agit d'un projet simple de [WIKI](http://fr.wikipedia.org/wiki/ 
-Wiki) afin de mettre en exergue l'utilisation du micro Framework  
-[Limonade PHP](http://www.sofa-design.net/limonade).
+Il s'agit d'un projet simple de [WIKI](http://fr.wikipedia.org/wiki/Wiki) afin de mettre en exergue l'utilisation du micro Framework [Limonade PHP](http://www.sofa-design.net/limonade).
 
 Nous avons choisi de développer un système basé sur les fichiers.
-Chaque page est donc un fichier dans le dossier pages à la racine du  
-projet.
-Ces fichiers sont au format .mkd et utilisent la syntaxe [Markdown](http://fr.wikipedia.org/wiki/Markdown 
-).
+Chaque page est donc un fichier dans le dossier pages à la racine du projet.
+Ces fichiers sont au format .mkd et utilisent la syntaxe [Markdown](http://fr.wikipedia.org/wiki/Markdown).
 
-_Attention, ce projet ne sert que d'illustration à l'utilisation d'un  
-développement sur le Framework [Limonade PHP](http://www.sofa-design.net/limonade 
-), nous ne pourrons en aucun cas être tenus responsables de  
-l'utilisation de ce projet en mode production_
+_Attention, ce projet ne sert que d'illustration à l'utilisation d'un développement sur le Framework [Limonade PHP](http://www.sofa-design.net/limonade), nous ne pourrons en aucun cas être tenus responsables de l'utilisation de ce projet en mode production_
 
 ## Comment ça marche ##
 
-Une fois l'archive du projet décompactée, déposer le contenu de  
-l'archive dans le dossier racine de votre serveur web (par exemple  
-htdocs ou www).
+Une fois l'archive du projet décompactée, déposer le contenu de l'archive dans le dossier racine de votre serveur web (par exemple htdocs ou www).
 
-Avant toutes créations de page, vous devez vous assurer que le serveur  
-a les droits en écriture sur le dossier pages (chmod 0755).
+Avant toutes créations de page, vous devez vous assurer que le serveur a les droits en écriture sur le dossier pages (chmod 0755).
 
-Par défaut, vous avez sur le WIKI 5 pages, elles sont décomposées de  
-la manière suivante :
+Par défaut, vous avez sur le WIKI 5 pages, elles sont décomposées de la manière suivante :
 
 * Home
-	* _C'est la page d'accueil, elle contient l'accès aux tutoriaux et  
-les deux pages d'exemples._
+	* _C'est la page d'accueil, elle contient l'accès aux tutoriaux et les deux pages d'exemples._
 * Another\_page, My\_new_page
 	* _Quelques pages de contenus pour l'exemple_
 * README, LISEZMOI
-	* _Il s'agit des tutoriaux (en français et anglais) pour ce petit  
-WIKI._
+	* _Il s'agit des tutoriaux (en français et anglais) pour ce petit WIKI._
 
 ### Afficher une page ###
 
 Pour afficher une page il suffit de :
 
-Cliquer sur le lien dans la page sur laquelle vous êtes ou cliquer sur  
-le nom de la page dans le "page name cloud" ou encore de remplacer  
-dans l'url le nom de l'ancienne page par celle à afficher.
+Cliquer sur le lien dans la page sur laquelle vous êtes ou cliquer sur le nom de la page dans le "page name cloud" ou encore de remplacer dans l'url le nom de l'ancienne page par celle à afficher.
 
 	Changer :
 	http://www.monserveur.com/?/Home
