@@ -13,5 +13,5 @@
 </div>
 <div id="tag_cloud" style="width:250px;position:absolute;right:25px;top:50px;border:solid 1px black;padding:7px;">
   <h5 style="text-align:center;border-bottom:solid 1px #ccc">Tag Cloud</h5>
-  <?=build_pages_cloud(); ?>
+  <p><?=html_pages_cloud(); ?></p>
 </div>

@@ -162,78 +162,74 @@ function wikir_render($str)
 {
   $str = Markdown($str);
   
-  $link_regexp = '/\[\[(.*?)\]\]/';
   $regexps = array();
   $replacements = array();
-  preg_match_all($link_regexp, $str, $matches, PREG_SET_ORDER);
-  foreach($matches as $match)
+  $refs = wikir_pages_references($str);
+  foreach($refs as $ref)
   {
-    
-    $regexps[] = '/\[\['.preg_quote($match[1]).'\]\]/';
+    $regexps[] = '/\[\['.preg_quote($ref).'\]\]/';
     
     $link  = '<a href="';
-    $link .= url_for($match[1]);
+    $link .= url_for($ref);
     $link .= '">';
-    $link .= h($match[1]);
+    $link .= h($ref);
     $link .= '</a>';
-    if(!WikirPage::exists($match[1])) $link .= '<sup>(?)</sup>';
+    if(!WikirPage::exists($ref)) $link .= '<sup>(?)</sup>';
     $replacements[] = $link;
   }
   return preg_replace($regexps, $replacements, $str);
 }
 
-function build_pages_cloud()
+
+/**
+ * Parse a string and returns found [[pages links]]
+ *
+ * @param string $str 
+ * @return array
+ */
+function wikir_pages_references($str)
+{
+  $refs = array();
+  $link_regexp = '/\[\[(.*?)\]\]/';
+  preg_match_all($link_regexp, $str, $matches, PREG_SET_ORDER);
+  foreach($matches as $match) $refs[] = $match[1];
+  return $refs;
+}
+
+function html_pages_cloud($separator = ' - ')
 {
   $files = file_list_dir(option('pages_dir'));
-  $keywords = array();
-  foreach ($files as $each)
+  $pages_names = array();
+  foreach ($files as $file)
   {
-    $parsable[] = file_read(file_path(option('pages_dir'), $each), $return = true);
-    foreach ($parsable as &$parsed)
-    {
-      Markdown($parsed);
-    }
+    $content = file_read(file_path(option('pages_dir'), $file), $return = true);
     $link_regexp = '/\[\[(.*?)\]\]/';
-    $regexps = array();
-    $replacements = array();
-    preg_match_all($link_regexp, $parsed, $matches, PREG_SET_ORDER);
-    $matcher[] = $matches;
-  }
-  
-  foreach ($matcher as $value)
-  {
-    foreach($value as $match)
+    $refs = wikir_pages_references($content);
+    foreach($refs as $ref)
     {
-      if(!array_key_exists($match[1], $keywords))
-      {
-        if (WikirPage::exists($match[1]))
-        {
-          $keywords[$match[1]] = 1;
-        }
-      } else
-      {
-        $keywords[$match[1]] += 1;
-      }
+      $pages_names[$ref] += 1;
     }
   }
-  $maxscore = max($keywords);
-  $minscore = min($keywords);
-  foreach ($keywords as $page_name=>$score)
+
+  $maxscore = max($pages_names);
+  $minscore = min($pages_names);
+  $html_links = array();
+  foreach ($pages_names as $page_name=>$score)
   {
-    $size = get_percent_size($maxscore, $minscore, $score, 90, 200);
-    $link  = '<a href="';
-    $link .= url_for($page_name);
-    $link .= '" style="font-size:'.$size.'%">';
-    $link .= h($page_name);
-    $link .= '</a>';
-    $data[$page_name] = $link;
+    $size = _get_percent_size($maxscore, $minscore, $score);
+    $html_links[] = render ( 
+                      'html_pages_cloud_link',
+                      null, 
+                      array('page_name' => $page_name, 'size' => $size)
+                    );
     
   }
-  $data = shuffle_pages_names($data);
-  $data = '<p>'.implode($data, ' - ').'</p>';
-  return $data;
+  
+  shuffle($html_links);
+  return implode($html_links, $separator);
 }
-function get_percent_size($maxscore, $minscore, $current_value, $minsize = 90, $maxsize = 200)
+
+function _get_percent_size($maxscore, $minscore, $current_value, $minsize = 90, $maxsize = 200)
 {
   if ($minscore < 1) $minscore = 1;
   $spread = $maxscore - $minscore;
@@ -242,14 +238,16 @@ function get_percent_size($maxscore, $minscore, $current_value, $minsize = 90, $
   $size = $minsize + (($current_value - $minscore) * $step);
   return $size;
 }
-function shuffle_pages_names ($pages_name) 
-{
-  while (count($pages_name) > 0) {
-      $val = array_rand($pages_name);
-      $shuffled_names[$val] = $pages_name[$val];
-      unset($pages_name[$val]);
-  }
-  if (isset($shuffled_names))
-  return $shuffled_names;
-}
+
+
+#
+# INLINE PARTIALS
+#
+
+function html_pages_cloud_link($vars){ extract($vars);?> 
+  <a href="<?=url_for($page_name);?>" style="font-size:<?=$size?>%;">
+    <?=h($page_name);?>
+  </a>
+<?}
+
 ?>
