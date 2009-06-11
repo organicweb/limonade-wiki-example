@@ -182,7 +182,7 @@ function wikir_render($str)
   return preg_replace($regexps, $replacements, $str);
 }
 
-function build_tagcloud()
+function build_pages_cloud()
 {
   $files = file_list_dir(option('pages_dir'));
   $keywords = array();
@@ -218,38 +218,38 @@ function build_tagcloud()
   }
   $maxscore = max($keywords);
   $minscore = min($keywords);
-  foreach ($keywords as $tagName=>$score)
+  foreach ($keywords as $page_name=>$score)
   {
-    $size = getPercentSize($maxscore, $minscore, $score, 90, 200);
+    $size = get_percent_size($maxscore, $minscore, $score, 90, 200);
     $link  = '<a href="';
-    $link .= url_for($tagName);
+    $link .= url_for($page_name);
     $link .= '" style="font-size:'.$size.'%">';
-    $link .= h($tagName);
+    $link .= h($page_name);
     $link .= '</a>';
-    $data[$tagName] = $link;
+    $data[$page_name] = $link;
     
   }
-  $data = shuffleTags($data);
+  $data = shuffle_pages_names($data);
   $data = '<p>'.implode($data, ' - ').'</p>';
   return $data;
 }
-function getPercentSize($maxscore, $minscore, $currentValue, $minsize = 90, $maxsize = 200)
+function get_percent_size($maxscore, $minscore, $current_value, $minsize = 90, $maxsize = 200)
 {
   if ($minscore < 1) $minscore = 1;
   $spread = $maxscore - $minscore;
   if($spread == 0) $spread = 1;
   $step = ($maxsize - $minsize) / $spread;
-  $size = $minsize + (($currentValue - $minscore) * $step);
+  $size = $minsize + (($current_value - $minscore) * $step);
   return $size;
 }
-function shuffleTags ($tags) 
+function shuffle_pages_names ($pages_name) 
 {
-  while (count($tags) > 0) {
-      $val = array_rand($tags);
-      $new_arr[$val] = $tags[$val];
-      unset($tags[$val]);
+  while (count($pages_name) > 0) {
+      $val = array_rand($pages_name);
+      $shuffled_names[$val] = $pages_name[$val];
+      unset($pages_name[$val]);
   }
-  if (isset($new_arr))
-  return $new_arr;
+  if (isset($shuffled_names))
+  return $shuffled_names;
 }
 ?>
