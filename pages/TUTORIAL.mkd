@@ -37,14 +37,20 @@ A noter: les options standards de Limonade sont détaillée dans le [README](htt
 	
 	dispatch('/', 'wikir_home');
 
-La fonction `dispatch()` permet de lier un url avec un fonction dans l'index.  
-Ici on route l'url "/" avec la fonction `wikir_home()`
+La fonction `dispatch()` permet de lier une url à une fonction.  
+Ici on route l'url `/` avec la fonction `wikir_home()`
 
 	
 	dispatch('/:page', 'wikir_page_show');
 
-Ici on passe un paramètre d'url à la fonction `wikir_page_show()`.  
-:page sera donc exploitable à l'aide de la fonction `params('page')`.
+De même on définit une route que lie le masque d'url `/:page` à la fonction`wikir_page_show()`.  
+Par exemple, les urls suivantes suivront cette route:
+
+    /ma_page
+    /ma_nouvelle_page/
+
+Le paramètre nommé `:page` sera exploitable à l'aide de la fonction `params('page')`.
+
 
 ### Wikir\_page\_show ###
 
