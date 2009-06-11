@@ -57,11 +57,20 @@ html {
 			position:relative;
 			height: 210px; /* 12 lines */
 			background: transparent url(bg_header_wikir.jpg) no-repeat 0 0;
-			text-indent: -9999px;
 			}
 			#header h1 {
-				visibility:hidden;
+				border: 0;
 				}
+			#header h1 a {
+			   display:block;
+				width:630px;
+				height:210px;
+            text-indent: -9999px;
+				}
+			#header p {
+			   position:absolute;
+			   left: -9999px;
+			   }
 		#footer {
 			padding: 0 55px;
 			background-color: #1a1818;

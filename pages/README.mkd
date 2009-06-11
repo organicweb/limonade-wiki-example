@@ -61,7 +61,7 @@ Cliquer sur le lien dans la page sur laquelle vous êtes ou cliquer sur le nom d
 Pour créer une nouvelle page il suffit : 
 
 1. Créer un lien dans une page, pour cela ajouter le code suivant : 
-<pre><code>[[Nom\_de\_ma\_nouvelle_page]]</code></pre>
+<pre><code>\[[Nom\_de\_ma\_nouvelle_page]\]</code></pre>
 2. Recharger la page
 3. Cliquer sur le lien nouvellement créer
 4. Saisir le contenu de la page dans le bloc de texte

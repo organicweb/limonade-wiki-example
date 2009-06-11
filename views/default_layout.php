@@ -19,7 +19,7 @@
 </head>
 <body>
 <div id="header">
-  <h1>Wikir</h1>
+  <h1><a href="./">Wikir</a></h1>
   <p>Limonade PHP Example (with raspberry syrup)</p>
 </div>
   <div id="content">
