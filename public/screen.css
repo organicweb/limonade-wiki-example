@@ -1,3 +1,5 @@
+/* @override http://localhost/limonade-php.net/examples/limonade-wiki-example/public/screen.css */
+
 html {
 	background-color: #b4a689;
 	text-align: center;
@@ -11,7 +13,7 @@ html {
 		color: #303030;
 		}
 		a, a:hover, a:visited {
-			color: #4596cd;
+			color: #6e000a;
 			}
 		a:hover {
 			text-decoration: none;
@@ -28,7 +30,7 @@ html {
 			}
 		h2 {
 			font-size: 1.5em;
-			color: #cddb12;
+			color: #eb638a;
 			margin-top: 2em;
 			line-height: 0.8;
 			margin-bottom: 1.2em;
@@ -38,10 +40,10 @@ html {
 			line-height: 0.89;
 			margin-top: 2.66em;
 			margin-bottom: 1.33em;
-			color:#95b383;
+			color: #d4a3a4;
 			}
 		pre {
-			background-color: #cddb12;
+			background-color: #eb638a;
 			font-size: 12px;
 			padding: 1.5em;
 			margin-bottom: 1.5em;
@@ -49,25 +51,16 @@ html {
 			}
 		code {
 			font: 12px Monaco, "Courier New", Courier, monospace;
-			color: #0d562a;
+			color: #560d0e;
 			}
 		#header {
 			position:relative;
-			height: 252px; /* 12 lines */
-			background: transparent url(img/bg_header.png) no-repeat 0 0;
+			height: 210px; /* 12 lines */
+			background: transparent url(bg_header_wikir.jpg) no-repeat 0 0;
+			text-indent: -9999px;
 			}
 			#header h1 {
-				position: absolute;
-				left: -9999px;
-				}
-			#header p {
-				position:absolute;
-				right: 55px;
-				top: 108px;	
-				font-size:  1.33em;
-				text-align: right;
-							
-				color: #c2b49b;
+				visibility:hidden;
 				}
 		#footer {
 			padding: 0 55px;
