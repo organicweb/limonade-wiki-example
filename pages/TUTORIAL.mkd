@@ -1,7 +1,16 @@
+## Introduction ##
+
+Ce document décrit de manière détaillé l'application Wikir. Il vous donnera un  aperçu des possibilités et de la manière d'utiliser le micro-framework Limonade pour créer vos propres application.
+
 ## Auteurs ##
 
 * Mathias Standaert ([Organic Web](http://www.organicweb.fr))
 * Fabrice Luraine ([Sofa Design](http://www.sofa-design.net))
+
+## Prérequis ##
+
+Pour comprendre ce tutorial, il est nécessaire d'avoir lu le fichier [LISEZMOI](http://sofa-design.net/limonade/LISEZMOI.htm) de Limonade.
+
 
 ## Explication du code ##
 
@@ -30,7 +39,7 @@ A l'aide de la fonction `option()`, on défini l'option d'environnement (`env`) 
 On crée également une option propre à notre application: `pages_dir`. Cette option va définir le dossier dans lequel seront stockées les pages du wiki.
 La fonction `file_path()`, retourne le chemin absolue sur le serveur du nom de dossier passer en deuxième paramètre.
 
-A noter: les options standards de Limonade sont détaillée dans le [README](http://sofa-design.net/limonade/README.htm)
+A noter: les options standards de Limonade sont détaillée dans le [LISEZMOI](http://sofa-design.net/limonade/LISEZMOI.htm)
 
 ### Dispatch ###
 
