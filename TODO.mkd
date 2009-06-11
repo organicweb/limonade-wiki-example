@@ -1,4 +1,24 @@
 # TODO #
 
-* create linkification in wikir_render helper function
+## NEXT ##
+
+
 * refactor controller functions
+* unifier nommages
+* license et copyright
+* documentation
+    * dans le code
+    * README(dans le wiki directement)
+* ajout design basé sur Limonade
+* install demo sur sofa-design.net/limonade/demos/wikir
+
+## LATER ##
+
+* flash messages with jquery
+* validations with filter_input_array
+* 
+
+## DONE ##
+
+
+* create linkification in wikir_render helper function
