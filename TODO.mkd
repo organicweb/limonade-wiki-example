@@ -3,9 +3,9 @@
 ## NEXT ##
 
 
+* cancel buttons (new / edit views)
 
 
-* license et copyright
 * documentation
     * dans le code
     * README(dans le wiki directement)
@@ -20,6 +20,7 @@
 
 ## DONE ##
 
+* license et copyright
 * unifier nommages
 * refactor controller functions
 * create linkification in wikir_render helper function
