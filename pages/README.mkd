@@ -15,10 +15,8 @@ Le 11 Juin 2009
 
 ## Version actuelle ##
 
-[**WIKIR 0.1**](http://github.com/organicweb/limonade-wiki-example)  
-aka _WIKIR Raspberry_
-Basée sur [**Limonade PHP 0.3**](http://github.com/sofadesign/ 
-limonade) aka _Citronnade_
+[**WIKIR 0.1**](http://github.com/organicweb/limonade-wiki-example) aka _WIKIR Raspberry_
+Basée sur [**Limonade PHP 0.3**](http://github.com/sofadesign/limonade) aka _Citronnade_
 
 
 ## Périmètre du projet ##
