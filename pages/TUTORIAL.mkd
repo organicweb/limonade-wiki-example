@@ -1,0 +1,16 @@
+## Auteurs ##
+
+* Mathias Standaert ([Organic Web](http://www.organicweb.fr))
+* Fabrice Luraine ([Sofa Design](http://www.sofa-design.net))
+
+## Explication du code ##
+
+### Require ###
+
+	Code :  
+	require_once 'lib/limonade.php'
+	
+Nous faisons appel ici à la bibliotheque de Limonade PHP afin de pouvoir bénéficier de tous les outils du Framework.
+
+### Configure ###
+
