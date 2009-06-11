@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="http://www.sofa-design.net/limonade/css/blueprint/ie.css" type="text/css" media="screen, projection">
   <![endif]-->
   <link rel="stylesheet" href="http://www.sofa-design.net/limonade/css/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="/public/screen.css" type="text/css" media="screen, projection">
 	<!-- Date: 2009-06-03 -->
 </head>
 <body>
