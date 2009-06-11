@@ -1,5 +1,3 @@
-# Limonade Wikir Example (with raspberry syrup) #
-
 ## Auteur du projet ##
 
 * Fabrice Luraine ([Sofa Design](http://www.sofa-design.net))

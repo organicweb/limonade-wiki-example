@@ -14,3 +14,67 @@ Nous faisons appel ici à la bibliotheque de Limonade PHP afin de pouvoir béné
 
 ### Configure ###
 
+	Code :  
+	$localhost = preg_match('/^localhost(\:\d+)?/', $_SERVER['HTTP_HOST']);
+
+Nous testons si l'url est local ou un serveur sur le web, ce qui nous permet ensuite de fixer le mode de l'environnement.
+
+	Code :  
+	$env =  $localhost ? ENV_DEVELOPMENT : ENV_PRODUCTION;
+	option('env', $env);
+	
+A l'aide de la fonction "option()", on set la variable static $options['env'] avec le resultat de la conditionnelle $env.
+
+	Code :  
+	option('pages_dir', file_path(option('root_dir'), 'pages'));
+	
+Encore une fois à l'aide de la fonction "option()", on set la variable static $options['pages_dir].  
+La fonction "file\_path()", retourne le chemin absolue sur le serveur du nom de dossier passer en deuxième paramètre.
+
+### Dispatch ###
+
+	Code :  
+	dispatch('/', 'wikir_home');
+
+La fonction dispatch permet de lier un url avec un fonction dans l'index.  
+Ici on route l'url "/" avec la fonction "wikir_home"
+
+	Code :  
+	dispatch('/:page', 'wikir_page_show');
+
+Ici on passe une variable à la fonction "wikir\_page\_show".  
+:page sera donc exploitable à l'aide de la fonction "params('page')" dans la fonction "wikir\_page_show"
+
+### Wikir\_page\_show ###
+
+	Code :  
+	function wikir_page_show()
+	{
+		$page_name = params('page');
+		if($page = WikirPage::find($page_name))
+		{
+			set('page_name', $page->name());
+			set('page_content', $page->content());
+			return html('show.php');
+		}
+		# If page doesn't exist, redirect to new page form
+		redirect(url_for($page_name, 'new'));
+	}
+
+Rentrons un peu plus dans le détail : 
+
+	Code :  
+	$page_name = params('page');
+
+Ici on récupère le paramètre page qui est passé par l'url
+
+	Code :  
+	if($page = WikirPage::find($page_name))
+	{
+		set('page_name', $page->name());
+		set('page_content', $page->content());
+		return html('show.php');
+	}
+
+A l'aide de la conditionnelle if on test si la page existe
+Les fonction static d'une class renvoie un objet on peut donc caler cet objet dans une variable et ensuite manipuler les fonctions de la class.  
