@@ -18,15 +18,18 @@
 </head>
 <body>
 <div id="header">
-    <h1>Limonade</h1>
-    <p>a PHP micro-framework</p>
-  </div>
+  <h1>Limonade</h1>
+  <p>a PHP micro-framework</p>
+</div>
   <div id="content">
-	<?= $content; ?>
-	</div>
-	<div id="footer">
+    <?= $content; ?>
+  </div>
+  <div id="page_name_cloud">
+    <h5>Tag Cloud</h5>
+    <p><?=html_pages_cloud(); ?></p>
+  </div>
+  <div id="footer">
 		&nbsp;
 	</div>
-
 </body>
 </html>
