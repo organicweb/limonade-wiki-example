@@ -15,7 +15,7 @@ Le 11 Juin 2009
 
 ## Version actuelle ##
 
-[**WIKIR 0.1**](http://github.com/organicweb/limonade-wiki-example) aka _WIKIR Raspberry_
+[**WIKIR 0.1**](http://github.com/organicweb/limonade-wiki-example) aka _WIKIR Raspberry_  
 Basée sur [**Limonade PHP 0.3**](http://github.com/sofadesign/limonade) aka _Citronnade_
 
 
@@ -27,7 +27,7 @@ Nous avons choisi de développer un système basé sur les fichiers.
 Chaque page est donc un fichier dans le dossier pages à la racine du projet.
 Ces fichiers sont au format .mkd et utilisent la syntaxe [Markdown](http://fr.wikipedia.org/wiki/Markdown).
 
-_Attention, ce projet ne sert que d'illustration à l'utilisation d'un développement sur le Framework [Limonade PHP](http://www.sofa-design.net/limonade), nous ne pourrons en aucun cas être tenus responsables de l'utilisation de ce projet en mode production_
+_Attention, ce projet ne sert que d'illustration à l'utilisation d'un développement sur le Framework [Limonade PHP](http://www.sofa-design.net/limonade), nous ne pourrons en aucun cas être tenus responsables de l'utilisation de ce projet en mode production_.
 
 ## Comment ça marche ##
 
@@ -58,7 +58,7 @@ Cliquer sur le lien dans la page sur laquelle vous êtes ou cliquer sur le nom d
 
 ### Créer une nouvelle page ###
 
-Pour créer une nouvelle page il suffit de:
+Pour créer une nouvelle page il suffit de :
 
 1. Créer un lien dans une page, pour cela ajouter le code suivant :
 <pre><code>[Nom\_de\_ma\_nouvelle_page]</code></pre>
