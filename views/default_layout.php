@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Wikir | Limonade PHP example</title>
+	<title>Wikir | <?= empty($page_name) ? 'Limonade PHP example' : $page_name;?></title>
 	<meta name="generator" content="TextMate http://macromates.com/">
 	<meta name="author" content="Fabrice Luraine">
 	<link rel="stylesheet" href="./public/blueprint/screen.css" type="text/css" media="screen, projection">
