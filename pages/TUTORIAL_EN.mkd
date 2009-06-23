@@ -1,0 +1,107 @@
+## Introduction ##
+
+This document describe in details the Wikir app. It'll give you a quick show with the possibilities and the usage of the micor Framework Limonade PHP to developp your own applications.
+
+## Authors ##
+
+* Mathias Standaert ([Organic Web](http://www.organicweb.fr))
+* Fabrice Luraine ([Sofa Design](http://www.sofa-design.net))
+
+## Prerequisite ##
+
+To get the point in this tutorial, it is necessary to read the file [README](http://limonade.sofa-design.net/README.htm) of Limonade PHP.
+
+
+## Code explaination ##
+
+### Require ###
+
+	
+	require_once 'lib/limonade.php'
+	
+We call the Limonade PHP library to have the benefit of the function from it.
+
+### Configure ###
+
+	
+	$localhost = preg_match('/^localhost(\:\d+)?/', $_SERVER['HTTP_HOST']);
+
+We do test if url is local or online to fixes the environement.
+
+	
+	$env =  $localhost ? ENV_DEVELOPMENT : ENV_PRODUCTION;
+	option('env', $env);
+	
+With the `option()` function, we define environement option (`env`) with the var $env.
+	
+	option('pages_dir', file_path(option('root_dir'), 'pages'));
+	
+We create another option `pages_dir` for our application. This option will define the folder where will placed the WIKI's pages.
+`file_path()` function return absolute path for the second parameter on the server.
+
+Notice : Standards option for Limonade PHP are described in [README](http://limonade.sofa-design.net/README.htm) of Limonade PHP.
+
+### Dispatch ###
+
+	
+	dispatch('/', 'wikir_home');
+
+`dispatch()` function let you link a function to an url.
+Here we do route `/` with `wikir_home()` function.-
+
+	
+	dispatch('/:page', 'wikir_page_show');
+
+Here we also route an url with a matching pattern `:page` to the `wikir_page_home()` function.  
+Ex. these url will follow the above route:
+
+    /my_page
+    /my_new_page/
+
+the named parameter can be retrive with the function `params('page')`.
+
+
+### Wikir\_page\_show ###
+
+	
+	function wikir_page_show()
+	{
+		$page_name = params('page');
+		if($page = WikirPage::find($page_name))
+		{
+			set('page_name', $page->name());
+			set('page_content', $page->content());
+			return html('show.php');
+		}
+		# If page doesn't exist, redirect to new page form
+		redirect(url_for($page_name, 'new'));
+	}
+
+This function call a class specially designed for this applications, `WikirPage`, it contains a few functions, some are statics and can be called with an instance of the class. ex: `find()`.  
+This class is in the lib folder.  
+
+Let's get more into code details for `wikir_page_show()` function :  
+
+	
+	$page_name = params('page');
+
+Here we catch the page parameter passed in url.  
+
+	
+	if($page = WikirPage::find($page_name))
+	{
+		set('page_name', $page->name());
+		set('page_content', $page->content());
+		return html('show.php');
+	}
+
+With an if conditionnal, we test if the page exists.  
+If it does exists, the static function `WikirPage::find()` return an instance of the class `WikirPage`, then we can call the classes methods.  
+Now we can pass variables to the view with the `set()` function.  
+The `html()` function passes all the parameters, call the view an show the html result of the page.  
+
+If it does not exists we don't get into the conditionnal and the code below is executed :
+
+	
+	# If page doesn't exist, redirect to new page form
+	redirect(url_for($page_name, 'new'));
