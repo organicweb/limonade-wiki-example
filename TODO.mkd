@@ -7,15 +7,12 @@
 * documentation, espacially index.php (tutorial like commenting)
 * crédit photo raspberry
 
-
-
 * install demo sur sofa-design.net/limonade/demos/wikir
 
 ## LATER ##
 
 * flash messages with jquery
 * validations with filter_input_array
-* 
 
 ## DONE ##
 

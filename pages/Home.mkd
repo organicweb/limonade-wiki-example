@@ -2,9 +2,11 @@
 
 Welcome to Wikir !
 
-Please check the [[README]] first
+Please check the [[README]] first  
+Merci de regarder le [[LISEZMOI]] en premier
 
-Then check the [[Tutorial]]
+Then check the [[TUTORIAL-EN]]  
+Puis regardez le [[TUTORIEL-FR]]
 
 Go to [[My new page]]
 or [[Another page]]
