@@ -76,7 +76,7 @@ class WikirPage
 			'/Ü/' => 'Ue',
 			'/Ö/' => 'Oe',
 			'/ß/' => 'ss',
-			'/[^\w\s]/' => ' ',
+			'/[^-\w\s]/' => ' ',
 			'/\\s+/' => $replacement
 		);
 		return preg_replace(array_keys($map), array_values($map), $name);

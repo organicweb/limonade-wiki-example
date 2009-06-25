@@ -5,6 +5,7 @@
 
 * cancel buttons (new / edit views)
 * documentation, espacially index.php (tutorial like commenting)
+* crédit photo raspberry
 
 
 
