@@ -28,6 +28,7 @@
   <div id="pages_cloud">
     <h5>Pages Cloud</h5>
     <p><?=html_pages_cloud(); ?></p>
+    <p style="text-align:right"><small>(Note: a reset of all wiki contents is sheduled once a day)</small></p>
   </div>
   <div id="footer">
 		<p>© 2009 Fabrice Luraine, Mathias Standaert | Aerated with <a href="http://sofa-design.net/limonade/" title="Limonade PHP micro-framework">Limonade</a></p>

@@ -2,11 +2,19 @@
 
 Welcome to Wikir !
 
+---
+
+This is a demo wiki application made with [Limonade PHP](http://limonade.sofa-design.net) micro-framework.
+
+You can [download](http://github.com/organicweb/limonade-wiki-example/tarball/master) the [sources](http://github.com/organicweb/limonade-wiki-example/) on [github](http://github.com/)
+
 Please check the [[README]] first  
 Merci de regarder le [[LISEZMOI]] en premier
 
-Then check the [[TUTORIAL-EN]]  
-Puis regardez le [[TUTORIEL-FR]]
+Then check the [[TUTORIAL_EN]]  
+Puis regardez le [[TUTORIEL_FR]]
+
+---
 
 Go to [[My new page]]
 or [[Another page]]
