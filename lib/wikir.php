@@ -167,8 +167,6 @@ class WikirPage
  */
 function html_wikir_render($str)
 {
-  $str = Markdown($str);
-  
   $regexps = array();
   $replacements = array();
   $refs = wikir_pages_references($str);
@@ -179,12 +177,12 @@ function html_wikir_render($str)
     $link  = '<a href="';
     $link .= url_for($ref);
     $link .= '">';
-    $link .= h($ref);
+    $link .= h(str_replace('_', '\_', $ref));
     $link .= '</a>';
     if(!WikirPage::exists($ref)) $link .= '<sup>(?)</sup>';
     $replacements[] = $link;
   }
-  return preg_replace($regexps, $replacements, $str);
+  return Markdown(preg_replace($regexps, $replacements, $str));
 }
 
 
