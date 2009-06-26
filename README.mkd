@@ -1,0 +1,5 @@
+# Wikir #
+
+This is a demo wiki application made with [Limonade PHP](http://limonade.sofa-design.net) micro-framework.
+
+For more information, see the [online demo](http://limonade.sofa-design.net/examples/wikir).
