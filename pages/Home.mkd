@@ -17,6 +17,6 @@ Puis regardez le [[TUTORIEL_FR]]
 ---
 
 Go to [[My new page]]
-or [[Another page]]
+or [[Another page]]. More about strawberries... and [[all berries in french]].
 
 An [[unkown page]]
