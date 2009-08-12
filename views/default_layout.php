@@ -24,7 +24,7 @@
 </div>
   <div id="content">
     <?= $content; ?>
-    <p><em><small>(Note: a reset of all wiki contents is sheduled once a day)</small></em></p>
+    <p><em><small>(Note: a reset of all wiki contents is sheduled every 2 hours)</small></em></p>
   </div>
   <div id="pages_cloud">
     <h5>Pages Cloud</h5>
