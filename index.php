@@ -35,6 +35,7 @@ dispatch('/:page', 'wikir_page_show');
     $page_name = params('page');
     if($page = WikirPage::find($page_name))
     {
+      lemon_csrf_unset_token();
       set('page_name', $page->name());
       set('page_content', $page->content());
       return html('show.php');
@@ -55,16 +56,19 @@ dispatch('/:page/new', 'wikir_page_new');
 dispatch_post('/:page', 'wikir_page_create');
   function wikir_page_create()
   {
-    $page_name    = $_POST['page_name'];
-    $page_content = $_POST['page_content'];
-    $page = new WikirPage();
-    $page->name($page_name);
-    $page->content($page_content); 
-    if($page->save())
+    if(lemon_csrf_require_valid_token())
     {
-      redirect_to($page->name());
+      $page_name    = $_POST['page_name'];
+      $page_content = $_POST['page_content'];
+      $page = new WikirPage();
+      $page->name($page_name);
+      $page->content($page_content); 
+      if($page->save())
+      {
+        redirect_to($page->name());
+      }
+      halt('An error occured. Unable to create this page. Please check page/ dir is writable.');
     }
-    halt('An error occured. Unable to create this page. Please check page/ dir is writable.');
   }
   
 dispatch('/:page/edit', 'wikir_page_edit');
@@ -73,6 +77,7 @@ dispatch('/:page/edit', 'wikir_page_edit');
     $page_name = params('page');
     if($page = WikirPage::find($page_name))
     {
+      lemon_csrf_unset_token();
       set('page_name', $page->name());
       set('page_content', $page->content());
       return html('edit.php');
@@ -87,13 +92,16 @@ dispatch_put('/:page', 'wikir_page_update');
     $page_content = $_POST['page_content'];
     if($page = WikirPage::find($page_name))
     {
-      $page->name($page_name);
-      $page->content($page_content);
-      if($page->save() !== FALSE)
+      if(lemon_csrf_require_valid_token())
       {
-        redirect($page->name());
+        $page->name($page_name);
+        $page->content($page_content);
+        if($page->save() !== FALSE)
+        {
+          redirect($page->name());
+        }
+        halt('An error occured. Unable to update this page. Please check page/ dir is writable.');
       }
-      halt('An error occured. Unable to update this page. Please check page/ dir is writable.');
     }
     halt(NOT_FOUND);
   }
