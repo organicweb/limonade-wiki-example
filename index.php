@@ -60,6 +60,8 @@ dispatch_post('/:page', 'wikir_page_create');
     {
       $page_name    = $_POST['page_name'];
       $page_content = $_POST['page_content'];
+      if(is_spam($page_content)) return halt(HTTP_FORBIDDEN);
+      
       $page = new WikirPage();
       $page->name($page_name);
       $page->content($page_content); 
@@ -90,6 +92,8 @@ dispatch_put('/:page', 'wikir_page_update');
   {
     $page_name    = params('page');
     $page_content = $_POST['page_content'];
+    if(is_spam($page_content)) return halt(HTTP_FORBIDDEN);
+    
     if($page = WikirPage::find($page_name))
     {
       if(lemon_csrf_require_valid_token())

@@ -155,6 +155,18 @@ class WikirPage
 	
 }
 
+## OTHER USEFUL FUNCTION
+function is_spam($str)
+{
+  $spam_words = array();
+  $spam_words[] = "hyves.me.uk/325";
+  foreach($spam_words as $spam)
+  {
+    if(strpos($str, $spam) !== false) return true;
+  }
+  return false;
+}
+
 
 ## HELPERS
 

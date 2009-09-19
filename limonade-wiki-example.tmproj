@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>views/default_layout.php</string>
+	<string>lib/lemon_security.php</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -13,6 +13,8 @@
 			<string>limonade-wiki-example</string>
 			<key>regexFolderFilter</key>
 			<string>!.*/(\.[^/]*|CVS|_darcs|_MTN|\{arch\}|blib|.*~\.nib|.*\.(framework|app|pbproj|pbxproj|xcode(proj)?|bundle))$</string>
+			<key>selected</key>
+			<true/>
 			<key>sourceDirectory</key>
 			<string></string>
 		</dict>
@@ -84,14 +86,28 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>43</integer>
+				<integer>35</integer>
 				<key>line</key>
-				<integer>86</integer>
+				<integer>90</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
+			<integer>72</integer>
+		</dict>
+		<key>lib/lemon_security.php</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>3</integer>
+				<key>line</key>
+				<integer>31</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
 			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>26</integer>
 		</dict>
 		<key>lib/limonade/views/error.html.php</key>
 		<dict>
@@ -207,40 +223,11 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>views/show.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>423</integer>
-				<key>line</key>
-				<integer>8</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>6</integer>
-				<key>line</key>
-				<integer>8</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>423</integer>
-				<key>line</key>
-				<integer>8</integer>
-			</dict>
-		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>index.php</string>
+		<string>lib/lemon_security.php</string>
 		<string>pages/TUTORIAL_EN.mkd</string>
 		<string>pages/TUTORIEL_FR.mkd</string>
 		<string>views/default_layout.php</string>
@@ -249,12 +236,11 @@
 		<string>pages/LISEZMOI.mkd</string>
 		<string>LICENSE</string>
 		<string>TODO.mkd</string>
-		<string>views/show.php</string>
 		<string>pages/README.mkd</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<false/>
 	<key>windowFrame</key>
-	<string>{{141, -55}, {1073, 874}}</string>
+	<string>{{512, 24}, {1073, 874}}</string>
 </dict>
 </plist>
