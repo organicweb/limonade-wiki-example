@@ -55,7 +55,7 @@
 /**
  * Limonade version
  */
-define('LIMONADE',              '0.4.3');
+define('LIMONADE',              '0.4.5');
 define('LIM_START_MICROTIME',   (float)substr(microtime(), 0, 10));
 define('LIM_SESSION_NAME',      'Fresh_and_Minty_Limonade_App');
 define('LIM_SESSION_FLASH_KEY', '_lim_flash_messages');
@@ -450,8 +450,20 @@ function env($reset = null)
   
   if(empty($env))
   {
+    if(empty($GLOBALS['_SERVER']))
+    {
+      // Fixing empty $GLOBALS['_SERVER'] bug 
+      // http://sofadesign.lighthouseapp.com/projects/29612-limonade/tickets/29-env-is-empty
+      $GLOBALS['_SERVER']  =& $_SERVER;
+      $GLOBALS['_FILES']   =& $_FILES;
+      $GLOBALS['_REQUEST'] =& $_REQUEST;
+      $GLOBALS['_SESSION'] =& $_SESSION;
+      $GLOBALS['_ENV']     =& $_ENV;
+      $GLOBALS['_COOKIE']  =& $_COOKIE;
+    }
+    
     $glo_names = array('SERVER', 'FILES', 'REQUEST', 'SESSION', 'ENV', 'COOKIE');
-      
+    
     $vars = array_merge($glo_names, request_methods());
     foreach($vars as $var)
     {
@@ -1330,7 +1342,8 @@ function render($content_or_func, $layout = '', $locals = array())
 	}
 	else
 	{
-	  $content = vsprintf($content_or_func, $vars);
+	  if(substr_count($content_or_func, '%') !== count($vars)) $content = $content_or_func;
+    else $content = vsprintf($content_or_func, $vars);
 	}
 
 	if(empty($layout)) return $content;
@@ -1448,7 +1461,7 @@ function render_file($filename, $return = false)
   {
     $content_type = mime_type(file_extension($filename));
     $header = 'Content-type: '.$content_type;
-    if(file_is_text($filename)) $header .= 'charset='.strtolower(option('encoding'));
+    if(file_is_text($filename)) $header .= '; charset='.strtolower(option('encoding'));
     if(!headers_sent()) header($header);
     return file_read($filename, $return);
   }
@@ -1493,7 +1506,7 @@ function url_for($params = null)
     $p = explode('/',$param);
     foreach($p as $v)
     {
-      if(!empty($v)) $paths[] = rawurlencode($v);
+      if(!empty($v)) $paths[] = str_replace('%23', '#', rawurlencode($v));
     }
   }
   
@@ -1681,6 +1694,7 @@ function require_once_dir($path, $pattern = "*.php")
 {
   if($path[strlen($path) - 1] != "/") $path .= "/";
   $filenames = glob($path.$pattern);
+  if(!is_array($filenames)) $filenames = array();
   foreach($filenames as $filename) require_once $filename;
   return $filenames;
 }
